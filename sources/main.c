@@ -6,7 +6,7 @@
 /*   By: joandre <joandre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:07:25 by joandre           #+#    #+#             */
-/*   Updated: 2024/12/11 11:57:05 by joandre          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:04:29 by joandre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,6 @@ int	ft_valid_args(char **in)
 	return (1);
 }
 
-int ft_expand_matrix(t_master *master, char **in)
-{
-	int	i;
-
-	i = 0;
-	if (in == NULL)
-		return (0);
-	while (in[i])
-	{
-		in[i] = expan_env(master, in[i]);
-		i++;
-	}
-	return (0);
-}
-
 int	ft_aux_main(t_master *master)
 {
 	if (!master->imput)
@@ -50,7 +35,7 @@ int	ft_aux_main(t_master *master)
 	trim_whitespace(master->imput);
 	if (ft_strcmp(master->imput, "") == 0)
 		return (free(master->imput), 0);
-	add_history(master->imput); 
+	add_history(master->imput);
 	if (its_ok(master->imput))
 	{
 		master->imput = expan_env(master, master->imput);
@@ -59,7 +44,6 @@ int	ft_aux_main(t_master *master)
 		str_replace_del(&master->imput[0], '|', 127);
 		trim_whitespace(master->imput);
 		master->in = ft_split(master->imput, 127);
-		// ft_expand_matrix(master, master->in);
 		if (ft_find_way(master) == -1)
 			return (0);
 	}

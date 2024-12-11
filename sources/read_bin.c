@@ -6,7 +6,7 @@
 /*   By: joandre <joandre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 04:58:30 by joandre           #+#    #+#             */
-/*   Updated: 2024/12/11 11:45:22 by joandre          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:08:22 by joandre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_current_dir(t_master *master, char **av)
 {
-	printf("chegou\n");
 	print_default_fd(master, ft_strjoin("command not found: ", av[0]));
 	printf("\n");
 	exit(127);
@@ -26,22 +25,22 @@ int	built_in_path(char *cmd_new)
 
 	len_path = ft_strlen(cmd_new);
 	if (len_path >= ft_strlen("env") && ft_strcmp(&(cmd_new[len_path
-				- ft_strlen("env")]), "env") == 0)
+					- ft_strlen("env")]), "env") == 0)
 		return (1);
 	if (len_path >= ft_strlen("export") && ft_strcmp(&(cmd_new[len_path
-				- ft_strlen("export")]), "export") == 0)
+					- ft_strlen("export")]), "export") == 0)
 		return (1);
 	if (len_path >= ft_strlen("echo") && ft_strcmp(&(cmd_new[len_path
-				- ft_strlen("echo")]), "echo") == 0)
+					- ft_strlen("echo")]), "echo") == 0)
 		return (1);
 	if (len_path >= ft_strlen("cd") && ft_strcmp(&(cmd_new[len_path
-				- ft_strlen("cd")]), "cd") == 0)
+					- ft_strlen("cd")]), "cd") == 0)
 		return (1);
 	if (len_path >= ft_strlen("pwd") && ft_strcmp(&(cmd_new[len_path
-				- ft_strlen("pwd")]), "pwd") == 0)
+					- ft_strlen("pwd")]), "pwd") == 0)
 		return (1);
 	if (len_path >= ft_strlen("unset") && ft_strcmp(&(cmd_new[len_path
-				- ft_strlen("unset")]), "unset") == 0)
+					- ft_strlen("unset")]), "unset") == 0)
 		return (1);
 	return (0);
 }
@@ -87,22 +86,22 @@ void	ft_bin(t_master *master, char **av)
 	char	*path;
 	char	**paths;
 	int		i;
-	
+
 	i = 0;
 	path = ft_getenv(master->environ, "PATH");
 	paths = ft_split(path, ':');
-	if (execve(av[0], av, master->environ) != 0 && ft_count_matriz(paths) > 0)
+	if (execve(av[0], av, master->environ) != 0)
 	{
-		printf("chegou\n");
-		while (paths[i])
+		if (paths != NULL)
 		{
-			path = ft_very_and_bar(paths[i]);
-			if (!path)
-				i++;
-			else if (ft_bin_(master, av, path) != 0)
+			while (paths[i])
 			{
-				free(path);
-				i++;
+				path = ft_very_and_bar(paths[i]);
+				if (ft_bin_(master, av, path) != 0)
+				{
+					free(path);
+					i++;
+				}
 			}
 		}
 		free_matriz(paths);

@@ -6,7 +6,7 @@
 /*   By: joandre <joandre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 09:00:25 by aquissan          #+#    #+#             */
-/*   Updated: 2024/12/11 11:54:00 by joandre          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:07:20 by joandre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	ft_redirect(t_master *master, char *str)
 
 	tmp = ft_format_in_redir(str, 0, 0, 127);
 	in = ft_split(tmp, 127);
-	ft_expand_matrix(master, in);
 	rm_void(in);
 	if (there_is_redirect(in))
 	{

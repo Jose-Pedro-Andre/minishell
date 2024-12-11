@@ -6,7 +6,7 @@
 /*   By: joandre <joandre@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 16:08:32 by joandre           #+#    #+#             */
-/*   Updated: 2024/12/11 11:54:33 by joandre          ###   ########.fr       */
+/*   Updated: 2024/12/11 12:57:39 by joandre          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int			ft_env(t_master *master);
 int			ft_echo(char **in);
 int			ft_unset(t_master *master, char **str);
 int			ft_exit(t_master *master, char **in);
-// void		*ft_realloc(void *ptr, size_t new_size);
 void		*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 int			ft_export(t_master *master, char *name, char *value);
 int			export(t_master *master, char **in);
